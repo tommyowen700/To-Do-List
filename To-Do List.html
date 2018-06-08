@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>A Few Things To-Do</title>
+
+<style>
+
+
+
+.todoBox {
+	width: 95%;
+//	border-style: solid;
+//	border-color: blue;
+	text-align: center;
+	padding: 10px;
+}
+
+.todoBox:after {
+
+	content: "";
+	display: table;
+	clear: both;
+
+}
+
+h3 {
+
+	color: black;
+	text-align: left;
+	
+}
+
+a {
+
+	text-decoration: none;
+
+}
+
+p {
+
+	margin-left: 0px;
+
+}
+
+input {
+
+	width: 75%;
+	float: left;
+	border-style: solid;
+	border-width: 1.5px;
+	border-color: black;
+	margin-right: 5px;
+
+}
+
+
+.ADD {
+
+	color: white;
+	background-color: green;
+	float: left;
+	cursor: pointer;
+	width: 15%;
+	
+}
+
+.ADD:hover {
+
+	background-color: #32CD32;
+
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  border-style: solid;
+  border-color: black;
+  border-width: 1.5px;
+}
+
+
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 10px 8px 10px 40px;
+  list-style-type: none;
+  margin: 5px;
+  font-size: 14px;
+}
+
+
+ul li.checked {
+  text-decoration: line-through;
+  text-decoration-color: red;
+}
+
+
+
+ul li.checked::before {
+
+  content: "";
+  position: absolute;
+  border-color: blue;
+  border-style: solid;
+  background-color: white;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px 5px 8px 11px;
+  color: #80e5ff;
+}
+
+.close:hover {
+  opacity: 0.5;
+  transition: .5s
+}
+
+.edit { 
+  position: absolute;
+  top: 0;
+  padding: 8px 11px 8px 16px;
+  color: #80e5ff;
+  right: 45px;
+}
+
+.edit:hover {
+
+  opacity: 0.5;
+  transition: .5s
+
+}
+
+.middleLine { 
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px 5px 8px 5px;
+  color: #80e5ff;
+  right: 40px;
+}
+
+
+.tasks {
+
+	width: 90%;
+//	border-style: solid;
+//	border-color: green;
+	padding: 10px;
+
+}
+
+</style>
+</head>
+<body>
+
+<div id="div1" class="todoBox">
+<h3><a href="https://www.jahnelgroup.com/todo.html">To-Do List</a></h3> 
+<input type="text" id="myInput" placeholder="To-do">
+<span onclick="addItem()" class="ADD">ADD</span>
+</div>
+
+<div class="tasks">
+<p> Tasks: </p>
+<ul id="bList">
+
+</ul>
+</div>
+
+<script>
+
+
+var nodeList = document.getElementsByTagName("li");
+var i;
+for (i = 0; i < nodeList.length; i++) {
+var span = document.createElement("SPAN");
+var txt = document.createTextNode("delete");
+span.className = "close";
+span.appendChild(txt);
+nodeList[i].appendChild(span);
+}
+
+var sList = document.getElementsByTagName("li");
+var i;
+for (i=0; i < sList.length; i++) {
+var span = document.createElement("SPAN");
+var txt = document.createTextNode("edit");
+span.className = "edit";
+span.appendChild(txt);
+sList[i].appendChild(span);
+}
+
+var tList = document.getElementsByTagName("li");
+var i;
+for (i=0; i < tList.length; i++) {
+var span = document.createElement("SPAN");
+var txt = document.createTextNode("|");
+span.className = "middleLine";
+span.appendChild(txt);
+tList[i].appendChild(span);
+}
+
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+close[i].onclick = function() {
+var div = this.parentElement;
+div.style.display = "none";
+}
+}
+
+var strike = document.querySelector('ul');
+strike.addEventListener('click', function(ev) {
+if (ev.target.tagName === 'LI') {
+ev.target.classList.toggle('checked');
+}
+}, false);
+
+function addItem() {
+var list = document.createElement("li");
+var uInput = document.getElementById("myInput").value;
+var below = document.createTextNode(uInput);
+list.appendChild(below);
+if (uInput == '') {
+alert("Please enter a task!\nThank you!");
+} else {
+document.getElementById("bList").appendChild(list);
+}
+document.getElementById("myInput").value = "";
+var span = document.createElement("SPAN");
+var txt = document.createTextNode("delete");
+span.className = "close";
+span.appendChild(txt);
+list.appendChild(span);
+
+var span = document.createElement("SPAN");
+var txt = document.createTextNode("edit");
+span.className = "edit";
+span.appendChild(txt);
+list.appendChild(span);
+
+var span = document.createElement("SPAN");
+var txt = document.createTextNode("|");
+span.className = "middleLine";
+span.appendChild(txt);
+list.appendChild(span);
+
+
+for (i = 0; i < close.length; i++) {
+close[i].onclick = function() {
+var div = this.parentElement;
+div.style.display = "none";
+}
+}
+}
+</script>
+
+
+</body>
+</html>
